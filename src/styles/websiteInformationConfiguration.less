@@ -1,0 +1,77 @@
+.websiteInformationConfiguration{
+    .tabs-box{
+        padding: 20px 30px 0 30px;
+        background-color: #fff;
+        border-radius: 5px 5px 0 0;
+        .el-tabs{
+            .el-tabs__item.is-active {
+                font-weight: 500;
+                color: #2463EB;
+            }
+            .el-tabs__active-bar {
+                background-color: #2463EB;
+            }
+            .el-tabs__item{
+                color: #666666;
+                font-size: 16px;
+                font-weight: 400;
+                &:hover {
+                    color: #2463EB;
+                }
+            }
+            .el-tabs__nav-wrap::after {
+                height: 1px;
+                background-color: #E0E0E0;
+            }
+        }
+    }
+    .websiteInformation{
+        min-height: 910px;
+        padding: 5px 30px 30px;
+        background-color: #fff;
+        .basicTitle{
+            height: 70px;
+            line-height: 70px;
+            background: #F8FAFD;
+            font-size: 16px;
+            color: #333333;
+            .block{
+                display: inline-block;
+                margin: 0 16px 0 20px;
+                vertical-align: middle;
+                width: 4px;
+                height: 20px;
+                background: #2463EB;
+            }
+        }
+        .websiteInformationForm{
+            .el-form{
+                .el-form-item{
+                    display: block;
+                    margin: 20px 0 0 0;
+                    &:first-child{
+                        margin-top: 26px;
+                    }
+                    .el-form-item__label{
+                        width: 140px;
+                        font-size: 16px;
+                        color: #333333;
+                    }
+                    .el-form-item__content{
+                        width: calc(100% - 140px);
+                    }
+                    .el-select {
+                        width: 100%;
+                    }
+                    .el-button{
+                        width: 140px;
+                        height: 50px;
+                        font-size: 16px;
+                        background: #2463EB;
+                        margin: 10px 0 0 140px;
+                    }
+                }
+            }
+        }
+    }
+}

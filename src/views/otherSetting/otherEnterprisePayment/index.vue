@@ -1,0 +1,25 @@
+<template>
+  <div class="businessSetings" style="height: 1000px;">
+      <iframe-com :src="src"></iframe-com>
+  </div>
+</template>
+
+<script>
+import IframeCom from '@/components/common/IframeCom.vue'
+export default {
+  components: {
+      IframeCom
+  },
+  data() {
+      return {
+          src: '/admin/transfer_add.php'
+      }
+  },
+  methods: {
+  }
+}
+</script>
+
+<style>
+
+</style>
