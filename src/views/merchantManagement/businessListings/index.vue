@@ -68,7 +68,7 @@
         <div class="table-box">
             <el-table v-loading="tableLoading"
                 element-loading-text="加载中"
-                height="90%"
+                height="calc(100% - 60px)"
                 :data="tableData">
                 <template v-for="(item, index) in columnList">
                     <el-table-column :key="index" :prop="item.prop" :label="item.label" :width="item.width" v-if="item.show">

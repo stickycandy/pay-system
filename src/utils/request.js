@@ -16,7 +16,7 @@ const service = axios.create({
     // easy-mock服务挂了，暂时不使用了
     // baseURL: 'https://www.easy-mock.com/mock/592501a391470c0ac1fab128',
     timeout: 5000,
-    baseURL: process.env.NODE_ENV === 'development' ? '' : baseConfig.apiDomain, // 自动拼接域名
+    baseURL: process.env.NODE_ENV === 'development' ? '' : '', // baseConfig.apiDomain, // 自动拼接域名
     withCredentials: true,
     headers: {
         Accept: 'application/json',
@@ -26,7 +26,7 @@ const service = axios.create({
 
 service.interceptors.request.use(
     config => {
-        config.headers['Referer'] = 'https://jiu.shouxuanzp.cn/admin/order.php?pageSize=30&pageNumber=1&column=trade_no&type=0&dstatus=-1';
+        // config.headers['Referer'] = 'https://jiu.shouxuanzp.cn/admin/order.php?pageSize=30&pageNumber=1&column=trade_no&type=0&dstatus=-1';
         return {
             ...config,
             transformRequest: [

@@ -75,7 +75,7 @@
             <el-table
                 v-loading="tableLoading"
                 element-loading-text="加载中"
-                :data="tableData" height="90%" @selection-change="handleSelectionChange">
+                :data="tableData" height="calc(100% - 56px)" @selection-change="handleSelectionChange">
                 <!-- <el-table-column type="selection" width="64"> </el-table-column> -->
                 <template v-for="(item, index) in columnList">
                     <el-table-column :key="index" :prop="item.prop" v-if="item.show" :width="item.width">
