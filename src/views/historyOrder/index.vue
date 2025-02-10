@@ -78,7 +78,7 @@
               :data="tableData" height="90%" @selection-change="handleSelectionChange">
               <!-- <el-table-column type="selection" width="64"> </el-table-column> -->
               <template v-for="(item, index) in columnList">
-                  <el-table-column :key="index" :prop="item.prop" v-if="item.show">
+                  <el-table-column :key="index" :prop="item.prop" v-if="item.show" :width="item.width">
                       <template slot="header">
                           <div>
                               {{ item.label.split('-')[0] }}
@@ -88,14 +88,14 @@
                       </template>
                       <template slot-scope="scope">
                           <span v-if="scope.column.property == 'trade_no'">
-                              <el-button type="text" style="user-select: all;" @click="goToDetail(scope.row)">{{ scope.row[scope.column.property] }}</el-button>
+                              <el-button type="text" style="font-size: 14px; user-select: all;" @click="goToDetail(scope.row)">{{ scope.row[scope.column.property] }}</el-button>
                               <br />
                               {{ scope.row.api_trade_no }}
                           </span>
                           <span v-if="scope.column.property == 'out_trade_no'">
                               <span>{{ scope.row[scope.column.property] }} <el-button type="text" @click="handleCheckOrder(scope.row)">查单</el-button></span>
                               <br />
-                              <el-button type="text" @click="$router.push({path: '/businessListings', query: {uid: scope.row.uid, column: 'uid'}})">{{ scope.row.uid }}</el-button>
+                              <el-button type="text" style="font-size: 14px;" @click="$router.push({path: '/businessListings', query: {uid: scope.row.uid, column: 'uid'}})">{{ scope.row.uid }}</el-button>
                           </span>
                           <span v-else-if="scope.column.property == 'name'">
                               {{ scope.row[scope.column.property] }}
@@ -109,7 +109,7 @@
                           </span>
                           <span v-else-if="scope.column.property == 'typeshowname'">
                               <span class="typeshowname">
-                                  <img width="16" height="16" :src="iconMap[scope.row.channel]" alt="" />
+                                  <img width="16" height="16" :src="iconMap[scope.row.type]" alt="" />
                                   {{ scope.row[scope.column.property] }}({{ scope.row.channel }})
                                   <br />
                                   {{ scope.row.plugin }}
@@ -126,8 +126,8 @@
                                   <template v-else>
                                       <el-tag color="#F2F8FF" class="blueTag" >已支付</el-tag>
                                       <br />
-                                      <el-tag color="#FFF2F0" class="redTag" v-if="scope.row.notify == '-1'">通知失败</el-tag>
-                                      <el-tag color="#F2F8FF" class="blueTag" v-else>已通知</el-tag>
+                                      <el-tag style="margin-top: 5px" color="#FFF2F0" class="redTag" v-if="scope.row.notify == '-1'">通知失败</el-tag>
+                                      <el-tag style="margin-top: 5px" color="#F2F8FF" class="blueTag" v-else>已通知</el-tag>
                                   </template>
                               </div>
                           </span>
@@ -164,7 +164,7 @@
               <div class="dataInformation">
                   显示结果：{{ (collectionOrderForm.pageNumber - 1) * collectionOrderForm.pageSize + 1 }}-{{
                       (collectionOrderForm.pageNumber - 1) * collectionOrderForm.pageSize + tableData.length
-                  }}，总共{{ tableData.length }}条
+                  }}，总共{{ total }}条
               </div>
               <el-pagination
                   :current-page.sync="collectionOrderForm.pageNumber"
@@ -201,15 +201,15 @@
 import BreadCrumb from '@/components/common/BreadCrumb.vue';
 import '@/styles/collectionOrder.less';
 import bus from '@/utils/bus.js';
-import { queryOrderList, getOrderDetail, setStatusOrder, reNotify, manualRefund, getProvince, setRefund } from '@/api/history';
+import { queryOrderList, getOrderDetail, setStatusOrder, reNotify, manualRefund, getProvince, setRefund, checkOrder} from '@/api/history';
 import zfbPay from '@/assets/img/common/table-zfbPay-icon.png';
 import wxPay from '@/assets/img/common/wxpay.png';
 import OrderDetail from './orderDetail.vue';
 
 const iconMap = {
-  140: zfbPay,
-  142: wxPay  
-
+  1: zfbPay,
+  2: wxPay,
+  4: 'https://jiu.shouxuanzp.cn/assets/icon/bank.ico'
 }
 
 export default {
@@ -337,14 +337,14 @@ export default {
           ],
           tableData: [],
           columnList: [
-              { prop: 'trade_no', label: '系统订单号-充值订单号', width: 300, show: true },
-              { prop: 'out_trade_no', label: '商户订单号-商户号', show: true },
-              { prop: 'name', label: '商品名称-订单金额', show: true },
+              { prop: 'trade_no', label: '系统订单号-充值订单号', width: 250, show: true },
+              { prop: 'out_trade_no', label: '商户订单号-商户号', width: 216, show: true },
+              { prop: 'name', label: '商品名称-订单金额', width: 90, show: true },
               { prop: 'realmoney', label: '实际支付-商户分成 ', width: 100, show: true },
-              { prop: 'typeshowname', label: '支付方式-支付模式', show: true },
+              { prop: 'typeshowname', label: '支付方式-支付模式',  width: 120, show: true },
               { prop: 'addtime', label: '充值时间-回调时间', show: true },
               { prop: 'status', label: '充值状态', width: 80, show: true },
-              { prop: 'operate', label: '操作', show: true }
+              { prop: 'operate', label: '操作', width: 110, show: true }
           ],
           timeFrame: '',
           multipleSelection: [],

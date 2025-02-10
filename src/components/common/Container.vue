@@ -26,6 +26,14 @@ export default {
         bus.$on('collapse-content', (msg) => {
             this.collapse = msg;
         });
+    },
+    watch: {
+        $route(to, from) {
+            const routerView = document.querySelector('.content');
+            if (routerView) {
+                routerView.scrollTop = 0;
+            }
+        }
     }
 };
 </script>

@@ -68,9 +68,10 @@
         <div class="table-box">
             <el-table v-loading="tableLoading"
                 element-loading-text="加载中"
+                height="90%"
                 :data="tableData">
                 <template v-for="(item, index) in columnList">
-                    <el-table-column :key="index" :prop="item.prop" :label="item.label" :min-width="item.width" v-if="item.show">
+                    <el-table-column :key="index" :prop="item.prop" :label="item.label" :width="item.width" v-if="item.show">
                         <template slot-scope="scope">
                             <span v-if="scope.column.property == 'uid'">
                                 <span class="viewKey">
@@ -81,24 +82,24 @@
                                 <span class="userGroup"> {{ scope.row.groupname }} </span>
                             </span>
                             <span v-else-if="scope.column.property == 'current_payrate'">
-                                <el-button type="text" @click="getUserRateList(scope.row, '0')">{{ scope.row.current_money }}</el-button>
+                                <el-button style="font-size: 14px;" type="text" @click="getUserRateList(scope.row, '0')">{{ scope.row.current_money }}</el-button>
                                 <br />
-                                {{ scope.row[scope.column.property] }}
+                                <span style="color: #67C23A;">{{ scope.row[scope.column.property] }}</span>
                             </span>
                             <span v-else-if="scope.column.property == 'yestday_payrate'">
-                                <el-button type="text" @click="getUserRateList(scope.row, '-1')">{{ scope.row.yestday_money }}</el-button>
+                                <el-button style="font-size: 14px;" type="text" @click="getUserRateList(scope.row, '-1')">{{ scope.row.yestday_money }}</el-button>
                                 <br />
-                                {{ scope.row[scope.column.property] }}
+                                <span style="color: #67C23A;">{{ scope.row[scope.column.property] }}</span>
                             </span>
                             <span v-else-if="scope.column.property == 'thirty_payrate'">
-                                <el-button type="text">{{ scope.row.thirty_money }}</el-button>
+                                <el-button style="font-size: 14px;" type="text">{{ scope.row.thirty_money }}</el-button>
                                 <br />
-                                {{ scope.row[scope.column.property] }}
+                                <span style="color: #67C23A;">{{ scope.row[scope.column.property] }}</span>
                             </span>
                             <span v-else-if="scope.column.property == 'ten_payrate'">
-                                <el-button type="text">{{ scope.row.ten_money }}</el-button>
+                                <el-button style="font-size: 14px;" type="text">{{ scope.row.ten_money }}</el-button>
                                 <br />
-                                {{ scope.row[scope.column.property] }}
+                                <span style="color: #67C23A;">{{ scope.row[scope.column.property] }}</span>
                             </span>
                             <span v-else-if="scope.column.property == 'status'" class="status-wrap">
                                 <span class="status" :class="scope.row.status === '1' ? 'active' : ''" @click="handleSetUser('user', scope.row, scope.row.status)">
@@ -127,6 +128,7 @@
                                 <el-button type="text" @click="settlementNotice(scope.row)">结算通知</el-button>
                                 <el-button type="text" @click="order(scope.row)">订单</el-button>
                                 <el-button type="text" @click="login(scope.row)">登录</el-button>
+                                <br />
                                 <el-button type="text" @click="details(scope.row)">明细</el-button>
                                 <el-button type="text" @click="change(scope.row)">
                                     <img src="@/assets/img/common/table-change-icon.png" alt="" />
@@ -293,15 +295,15 @@ export default {
             timeFrame: '',
             tableData: [],
             columnList: [
-                { prop: 'uid', label: '商户号/用户组', width: '160', show: true },
-                { prop: 'current_payrate', label: '当天量/成率',width: '100', show: true },
-                { prop: 'yestday_payrate', label: '昨天量/成率',width: '100', show: true },
-                { prop: 'thirty_payrate', label: '30m量/成率',width: '100', show: true },
-                { prop: 'ten_payrate', label: '10m量/成率',width: '100', show: true },
+                { prop: 'uid', label: '商户号/用户组', width: '120', show: true },
+                { prop: 'current_payrate', label: '当天量/成率', width: '80', show: true },
+                { prop: 'yestday_payrate', label: '昨天量/成率', width: '80', show: true },
+                { prop: 'thirty_payrate', label: '30m量/成率', width: '80', show: true },
+                { prop: 'ten_payrate', label: '10m量/成率', width: '80', show: true },
                 { prop: 'money', label: '跑单总额', show: true },
-                { prop: 'addtime', label: '域名/添加时间', width: '208', show: true },
-                { prop: 'status', label: '状态', width: '208', show: true },
-                { prop: 'operate', label: '操作', width: '330', show: true }
+                { prop: 'addtime', label: '域名/添加时间', width: '170', show: true },
+                { prop: 'status', label: '状态', width: '200', show: true },
+                { prop: 'operate', label: '操作', width: '200', show: true }
             ],
             total: 0,
             activityType: [],

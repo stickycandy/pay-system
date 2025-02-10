@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import './assets/css/theme-green/index.css'; // 浅绿色主题
 import './assets/css/icon.css';
 import 'babel-polyfill';
+import { checkLogin } from '@/api/login';
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI, {
@@ -35,6 +36,8 @@ Vue.prototype.$echarts = echarts;
 Vue.prototype.$apiDomain = baseconfig.apiDomain;
 
 
+checkLogin();
+
 // //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title;
@@ -54,7 +57,14 @@ router.beforeEach((to, from, next) => {
     //         next();
     //     }
     // }
-    next();
+    if (to.path.includes('/login')) {
+        console.log('path', to.path);
+        next();
+    } else {
+        checkLogin().then(res => {
+            next();
+        })
+    }
 });
 
 new Vue({

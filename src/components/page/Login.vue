@@ -33,7 +33,7 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm()">登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
+                <p class="login-tips">Tips : 请填写正确的用户名和密码。</p>
             </el-form>
         </div>
     </div>
@@ -46,7 +46,7 @@ export default {
         return {
             param: {
                 username: 'admin',
-                password: 'jiutian',
+                password: '', // jiutian
                 code: '',
             },
             rules: {

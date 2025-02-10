@@ -33,3 +33,8 @@ export const getProvince = (data) => {
 export const setRefund = data => {
   return api.post('/admin/ajax_historyorder.php?act=apirefund', data)
 }
+
+// 查单
+export const checkOrder = data => {
+  return api.post('/admin/ajax_historyorder.php?act=checkOrder', data)
+}

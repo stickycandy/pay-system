@@ -47,7 +47,7 @@
           </div>
       </div>
       <div class="table-box">
-          <el-table :data="tableData">
+          <el-table class="el-table" height="90%" :data="tableData">
               <template v-for="(item, index) in columnList">
                   <el-table-column :key="index" :prop="item.prop" :label="item.label" :min-width="item.width" v-if="item.show">
                       <template slot-scope="scope">
