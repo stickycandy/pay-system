@@ -209,7 +209,7 @@ import OrderDetail from './orderDetail.vue';
 const iconMap = {
   1: zfbPay,
   2: wxPay,
-  4: 'https://jiu.shouxuanzp.cn/assets/icon/bank.ico'
+  4: '/assets/icon/bank.ico'
 }
 
 export default {

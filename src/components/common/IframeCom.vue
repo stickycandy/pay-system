@@ -3,7 +3,7 @@
 </template>
 
 <script>
-const apiDomain = 'https://jiu.shouxuanzp.cn';
+const apiDomain = '';
 export default {
     name: "IframeCom",
     props: ["src"],

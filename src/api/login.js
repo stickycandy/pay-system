@@ -6,7 +6,7 @@ export const login = data => {
 
 // 退出登录
 export const loginOut = () => {
-  return api.get('admin/login.php?logout')
+  return api.get('/admin/login.php?logout')
 }
 
 // 检查登录状态

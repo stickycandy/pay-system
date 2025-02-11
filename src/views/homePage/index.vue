@@ -61,7 +61,7 @@
                 <div class="panel-title">管理员信息</div>
                 <div class="user-wrap">
                     <div class="head-img">
-                        <img src="https://jiu.shouxuanzp.cn/assets/img/logo.png?r=82626" alt="头像" />
+                        <img src="/assets/img/logo.png?r=82626" alt="头像" />
                     </div>
                     <div class="label-con">
                         <div class="label">用户名：<span>admin</span></div>
@@ -952,13 +952,16 @@ export default {
         // 当天商户排行榜
         getDayRankData(currentDateMerchRank) {
             let myCharts = this.$echarts.init(document.getElementById('chart5'));
-            let nameData = Object.keys(currentDateMerchRank);
-            let valueData = Object.values(currentDateMerchRank).map(item => {
-                if (isString(item)) {
-                    return parseFloat(item) * 10000;
-                } else {
-                    return item * 10000;
+            let nameData = [];
+            let valueData = [];
+            Object.entries(currentDateMerchRank).map(item => {
+                return {
+                    name: item[0],
+                    value: isString(item[1])? parseFloat(item[1]) * 10000 : item[1] * 10000
                 }
+            }).sort((a, b) => b.value - a.value).map(item => {
+                nameData.push(item.name);
+                valueData.push(item.value);
             });
             let moneyData = [];
             var color = ['#EE562B', '#FF970C', '#FFD023'];
@@ -1171,13 +1174,16 @@ export default {
         // 当月商户排行榜
         getMonthRankData(currentMonthMerchRank) {
             let myCharts = this.$echarts.init(document.getElementById('chart6'));
-            let nameData = Object.keys(currentMonthMerchRank);
-            let valueData = Object.values(currentMonthMerchRank).map(item => {
-                if (isString(item)) {
-                    return parseFloat(item) * 10000;
-                } else {
-                    return item * 10000;
+            let nameData = [];
+            let valueData = [];
+            Object.entries(currentMonthMerchRank).map(item => {
+                return {
+                    name: item[0],
+                    value: isString(item[1])? parseFloat(item[1]) * 10000 : item[1] * 10000
                 }
+            }).sort((a, b) => b.value - a.value).map(item => {
+                nameData.push(item.name);
+                valueData.push(item.value);
             });
             let moneyData = [];
             var color = ['#EE562B', '#FF970C', '#FFD023'];

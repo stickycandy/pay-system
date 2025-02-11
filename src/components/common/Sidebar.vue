@@ -2,7 +2,7 @@
     <div class="sidebar">
         <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#2463EB" unique-opened router>
             <div class="user-img">
-                <img src="https://jiu.shouxuanzp.cn/assets/img/logo.png" alt="" />
+                <img src="/assets/img/logo.png" alt="" />
             </div>
             <template v-for="item in items">
                 <template v-if="item.subs">

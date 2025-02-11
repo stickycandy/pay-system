@@ -578,7 +578,7 @@ export default {
          * 登录
          */
         login(row) {
-            window.open(`https://jiu.shouxuanzp.cn/admin/sso.php?uid=${row.uid}`);
+            window.open(`/admin/sso.php?uid=${row.uid}`);
         },
         /**
          * 明细
