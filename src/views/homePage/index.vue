@@ -136,6 +136,15 @@
                 </div>
             </div>
         </div>
+        <div class="mb bg channel-data">
+            <div class="channel-title"><div class="circular"></div>   当天通道统计</div>
+            <div class="channel-content">
+                <div class="channel-item" v-for="(item, index) in Object.entries(channelData)" :key="index">
+                    <div class="item-title enter">{{ item[0] }}</div>
+                    <div class="enter item-count">{{ item[1] | thousandsSeparator }}</div>
+                </div>
+            </div>
+        </div>
         <div class="trade-wrap mb">
             <!-- 近30天成交金额 -->
             <div class="trade-left mr bg">
@@ -217,7 +226,7 @@
 import geoJson from '@/utils/china.json';
 import '@/styles/homePage.less';
 import BreadCrumb from '@/components/common/BreadCrumb.vue';
-import { queryDashboard } from '@/api/dashboard';
+import { queryDashboard, queryChannel } from '@/api/dashboard';
 import { loginOut } from '@/api/login';
 
 function isString(value) {
@@ -230,6 +239,7 @@ export default {
     },
     data() {
         return {
+            channelData: {},
             detailData: {},
             choseTransaction: 0,
             choseTransactionAmount: 0,
@@ -1636,11 +1646,21 @@ export default {
                 ]
             };
             myCharts.setOption(option);
-        }
+        },
+        getChannelData() {
+            queryChannel().then(res => {
+                if (res.code == 0) {
+                    this.channelData = res.data;
+                }
+            });
+        },
     },
+
+
     mounted() {
         this.getData();
         this.getCurrentTimeToSeconds();
+        this.getChannelData();
         this.timer = setInterval(() => {
             this.getCurrentTimeToSeconds();
         }, 1000);

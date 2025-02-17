@@ -19,8 +19,9 @@
           </el-form-item>
           <el-form-item label="用户组:" prop="gid">
             <el-select style="width: 100%" v-model="DetailForm.gid" placeholder="请选择">
-              <el-option label="测试-支付宝" value="30"></el-option>
-              <el-option label="付款测试" value="31"></el-option>
+              <el-option v-for="item in Object.entries(userGroupList)" :key="item[0]" :label="item[1]" :value="item[0]"></el-option>
+              <!-- <el-option label="测试-支付宝" value="30"></el-option>
+              <el-option label="付款测试" value="31"></el-option> -->
             </el-select>
           </el-form-item>
           <el-form-item label="可用代付余额:" prop="money">
@@ -42,6 +43,8 @@
           </div>
           <el-form-item label="结算方式:" prop="settle_id">
             <el-select style="width: 100%" v-model="DetailForm.settle_id" placeholder="请选择">
+              <el-option label="支付宝" value="1"></el-option>
+              <el-option label="微信" value="2"></el-option>
               <el-option label="银行卡" value="4"></el-option>
             </el-select>
           </el-form-item>
@@ -112,7 +115,7 @@
 
 <script>
 import '@/styles/merchantDetail.less';
-import { addMerchant, editMerchant } from '@/api/merchantManagement';
+import { addMerchant, editMerchant, queryUserGroup } from '@/api/merchantManagement';
   export default {
     props: {
       dialogVisible: {
@@ -146,6 +149,7 @@ import { addMerchant, editMerchant } from '@/api/merchantManagement';
           pay: '1',
           settle: '1'
         },
+        userGroupList: {},
         rules: {
           account: [
             { required: true, message: '请输入结算账号', trigger: 'change' }
@@ -161,9 +165,22 @@ import { addMerchant, editMerchant } from '@/api/merchantManagement';
         this.$emit('close');
       },
 
+      getsUserGroup() {
+        queryUserGroup().then(res => {
+          if (res.code == 1) {
+            this.userGroupList = res.rows;
+          } else {
+            this.$message.error(res.msg);
+          }
+        })
+      },
+
       handleSubmit() {
         this.$refs.DetailRef.validate(valid => {
           if (valid) {
+            if (this.DetailForm.gid == 0 || this.DetailForm.gid == null) {
+              this.$message.error('请选择用户组');
+            }
             const queryDataFun = this.uid ? editMerchant(this.uid, this.DetailForm) : addMerchant(this.DetailForm);
             queryDataFun.then(res => {
               if (res.code == 0) {
@@ -190,8 +207,14 @@ import { addMerchant, editMerchant } from '@/api/merchantManagement';
       editDetail: {
         handler(newVal) {
           this.DetailForm = { ...newVal };
+          this.$refs.DetailRef.resetFields();
         },
         deep: true
+      },
+      dialogVisible(val) {
+        if (val) {
+          this.getsUserGroup();
+        }
       }
     }
   }

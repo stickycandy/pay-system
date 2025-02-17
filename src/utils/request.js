@@ -15,7 +15,7 @@ const service = axios.create({
     // process.env.NODE_ENV === 'development' 来判断是否开发环境
     // easy-mock服务挂了，暂时不使用了
     // baseURL: 'https://www.easy-mock.com/mock/592501a391470c0ac1fab128',
-    timeout: 5000,
+    timeout: 60000,  // 超时时间改成 60s
     baseURL: process.env.NODE_ENV === 'development' ? '' : '', // baseConfig.apiDomain, // 自动拼接域名
     withCredentials: true,
     headers: {

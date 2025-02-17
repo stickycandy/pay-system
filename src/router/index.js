@@ -56,7 +56,7 @@ export default new Router({
                 {
                     path: '/paymentInterface',
                     component: () => import(/* webpackChunkName: "dashboard" */ '@/views/paymentInterface'),
-                    meta: { title: '支付接口' },
+                    meta: { title: '通道管理' },
                     redirect: '/paymentChannel',
                     children: [
                         {

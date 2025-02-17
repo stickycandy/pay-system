@@ -75,7 +75,7 @@
             <el-table
                 v-loading="tableLoading"
                 element-loading-text="加载中"
-                :data="tableData" height="calc(100% - 56px)" @selection-change="handleSelectionChange">
+                :data="tableData" @selection-change="handleSelectionChange">
                 <!-- <el-table-column type="selection" width="64"> </el-table-column> -->
                 <template v-for="(item, index) in columnList">
                     <el-table-column :key="index" :prop="item.prop" v-if="item.show" :width="item.width">
@@ -122,12 +122,12 @@
                             </span>
                             <span v-else-if="scope.column.property == 'status'">
                                 <div class="status">
-                                    <el-tag color="#FFF2F0" class="redTag" v-if="scope.row[scope.column.property] == '0'">未支付</el-tag>
+                                    <el-tag v-if="scope.row[scope.column.property] == '0'">未支付</el-tag>
                                     <template v-else>
-                                        <el-tag color="#F2F8FF" class="blueTag" >已支付</el-tag>
+                                        <el-tag type="success" >已支付</el-tag>
                                         <br />
-                                        <el-tag style="margin-top: 5px" color="#FFF2F0" class="redTag" v-if="scope.row.notify == '-1'">通知失败</el-tag>
-                                        <el-tag style="margin-top: 5px" color="#F2F8FF" class="blueTag" v-else>已通知</el-tag>
+                                        <el-tag style="margin-top: 5px" type="danger" v-if="scope.row.notify == '-1'">通知失败</el-tag>
+                                        <el-tag style="margin-top: 5px" type="success" v-else>已通知</el-tag>
                                     </template>
                                 </div>
                             </span>
@@ -171,7 +171,7 @@
                     @current-change="handleCurrentChange"
                     :page-size="collectionOrderForm.pageSize"
                     background
-                    layout="prev, pager, next"
+                    layout="prev, pager, next, jumper"
                     :total="total"
                 >
                 </el-pagination>
@@ -343,7 +343,7 @@ export default {
                 { prop: 'realmoney', label: '实际支付-商户分成 ', width: 100, show: true },
                 { prop: 'typeshowname', label: '支付方式-支付模式',width: 120, show: true },
                 { prop: 'addtime', label: '充值时间-回调时间', show: true },
-                { prop: 'status', label: '充值状态', width: 80, show: true },
+                { prop: 'status', label: '充值状态', width: 86, show: true },
                 { prop: 'operate', label: '操作', width: 110, show: true }
             ],
             timeFrame: '',

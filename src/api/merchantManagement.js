@@ -55,3 +55,8 @@ export const queryUserRateList = (params) => {
     }
   })
 }
+
+// 查询用户群组
+export const queryUserGroup = () => {
+  return api.get('/admin/ajax_user.php?act=queryUserGroup')
+}

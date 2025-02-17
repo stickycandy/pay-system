@@ -67,7 +67,7 @@ export default {
                 },
                 {
                     index: 'paymentInterface',
-                    title: '支付接口',
+                    title: '通道管理',
                     icon: require('../../assets/img/Sidebar/payment_interface_icon.png'),
                     iconActive: require('../../assets/img/Sidebar/payment_interface_icon_active.png')
                 },

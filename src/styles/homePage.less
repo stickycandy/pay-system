@@ -337,4 +337,47 @@
             }
         }
     }
+
+    .channel-data {
+        padding: 30px 50px;
+        .channel-title {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 18px;
+            color: #666666;
+            margin-bottom: 16px;
+            .circular {
+                width: 8px;
+                height: 8px;
+                background: #2463eb;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+        }
+        .channel-content {
+            display: flex;
+            flex-wrap: wrap;
+            // justify-content: space-around;
+            font-weight: 500;
+            .channel-item {
+                flex: none;
+                min-width: 80px;
+                margin-right: 10px;
+            }
+            .item-title {
+                margin-top: 10px;
+                font-size: 14px;
+                color: #666666;
+                line-height: 24px;
+            }
+            .item-count {
+                font-size: 14px;
+                line-height: 32px;
+            }
+            .enter {
+                text-align: center;
+            }
+        }
+    }
 }
